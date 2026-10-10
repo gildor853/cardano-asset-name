@@ -1,0 +1,78 @@
+{
+  "name": "cardano-asset-name",
+  "version": "1.0.0",
+  "description": "Zero-dependency TypeScript helpers for Cardano native assets: policy ID + asset name parsing, CIP-14 asset fingerprints, CIP-67 asset name labels and CIP-68 reference/user token names.",
+  "author": "Gildor",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gildor853/cardano-asset-name.git"
+  },
+  "homepage": "https://github.com/gildor853/cardano-asset-name#readme",
+  "bugs": {
+    "url": "https://github.com/gildor853/cardano-asset-name/issues"
+  },
+  "keywords": [
+    "cardano",
+    "native-assets",
+    "asset-name",
+    "policy-id",
+    "fingerprint",
+    "cip14",
+    "cip67",
+    "cip68",
+    "blake2b",
+    "nft"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "DISCLAIMER.md",
+    "SECURITY.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "prepare": "npm run build",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "smoke": "node scripts/smoke.mjs && node scripts/smoke.cjs",
+    "check:readme": "node scripts/check-readme.mjs",
+    "prepublishOnly": "npm run typecheck && npm run test:coverage && npm run build && npm run smoke && npm run check:readme && npm run check:legal",
+    "check:legal": "node scripts/check-legal.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^5.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.3"
+  },
+  "overrides": {
+    "esbuild": "^0.28.2"
+  }
+}
